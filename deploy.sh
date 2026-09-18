@@ -80,7 +80,7 @@ print(ns[0]["id"] if ns else "")
 ')"
 if [ -z "$NS_ID" ]; then
   info "不存在，创建 KV namespace…"
-  NS_ID="$(cf_post --data "$(python3 -c 'import json,os; print(json.dumps({"title": os.environ["KV_TITLE"]}))')" \
+  NS_ID="$(cf_post --data "$(KV_TITLE="$KV_TITLE" python3 -c 'import json,os; print(json.dumps({"title": os.environ["KV_TITLE"]}))')" \
     "$API/accounts/$ACCOUNT_ID/storage/kv/namespaces" | python3 -c '
 import json,sys
 d=json.load(sys.stdin)
